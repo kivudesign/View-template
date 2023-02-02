@@ -4,63 +4,12 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "7ec85ac5ad338f17dfd84b6d2263ac41",
+    "content-hash": "6d9a0ca165845169f022399f70d0245a",
     "packages": [],
-    "packages-dev": [
-        {
-            "name": "wepesi/routing",
-            "version": "dev-master",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/bim-g/wepesi-router.git",
-                "reference": "666e3db4cec5cde25e252591505411ce2bf6c521"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/bim-g/wepesi-router/zipball/666e3db4cec5cde25e252591505411ce2bf6c521",
-                "reference": "666e3db4cec5cde25e252591505411ce2bf6c521",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=7.4"
-            },
-            "default-branch": true,
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "Wepesi\\Routing\\": "src/",
-                    "Wepesi\\Controller\\": "demo/controller/",
-                    "Wepesi\\Middlleware\\": "demo/middleware/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "Apache-2.0"
-            ],
-            "authors": [
-                {
-                    "name": "bim-g",
-                    "email": "ibmussafb@gmail.com"
-                }
-            ],
-            "description": "Simple and lightweight php module to write clean route of a web application",
-            "homepage": "https://github.com/bim-g/wepesi-router/issues",
-            "support": {
-                "docs": "https://github.com/bim-g/wepesi-router",
-                "email": "ibmussfb@gmail.com",
-                "forum": "https://github.com/bim-g/wepesi-router",
-                "issues": "https://github.com/bim-g/wepesi-router/issues",
-                "source": "https://github.com/bim-g/wepesi-router",
-                "wiki": "https://github.com/bim-g/wepesi-router"
-            },
-            "time": "2022-08-19T16:25:00+00:00"
-        }
-    ],
+    "packages-dev": [],
     "aliases": [],
     "minimum-stability": "dev",
-    "stability-flags": {
-        "wepesi/routing": 20
-    },
+    "stability-flags": [],
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {

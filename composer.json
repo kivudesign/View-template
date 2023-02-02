@@ -5,7 +5,7 @@
     "license": "apache-2.0",
     "autoload": {
         "psr-4": {
-            "Wepesi\\": "src/"
+            "Wepesi\\App\\": "src/"
         }
     },
     "authors": [
@@ -17,8 +17,5 @@
     "minimum-stability": "dev",
     "require": {
         "php": ">=7.4"
-    },
-    "require-dev": {
-        "wepesi/routing": "dev-master"
     }
 }

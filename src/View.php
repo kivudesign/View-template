@@ -1,62 +1,65 @@
 <?php
 
-
-namespace Wepesi;
+namespace Wepesi\App;
 
 class View
 {
 
-    private array $data = [];
-    private string $render;
-    private string $folder_name;
-    private string $root_folder;
+    private string $view_location;
+    private ?string $layout;
+    private array $data;
 
-    function __construct(string $folder_name = '/')
+    public function __construct(string $view_location)
     {
-        define("Wepesi\ROOT", str_replace('index.php', '', $_SERVER['SCRIPT_FILENAME']));
-        $this->root_folder = ROOT."views";
-        define("Wepesi\ERROR_VIEW", ROOT . $this->root_folder.'/404.php');
-        $this->render = ERROR_VIEW;
-        $this->folder_name = $this->addSlashes($folder_name);
+        $this->view_location = $view_location;
+        $this->layout = null;
+        $this->data = [];
     }
 
-    function setRoot(string $root){
-        $this->root_folder = ROOT.$this->addSlashes($root);
-    }
-    /**
-     * call this method to display file content
-     * @param string $file_name
-     */
-    function display(string $file_name)
-    {
-        $file = $this->checkFileExtension($file_name);
-        $file_source = $this->folder_name . $this->addSlashes($file);
-        if (is_file($this->root_folder . $file_source)) {
-            $this->render = $this->root_folder . $file_source;
-        }
-    }
-
-    /**
-     * assign variables data to be displayed on file_page
-     * @param string $key
-     * @param $value
-     */
-    function assign(string $key, $value)
-    {
+    public function assign(string $key,$value){
         $this->data[$key] = $value;
     }
-    /**
-     * @param $link
-     * @return false|mixed|string
-     */
-    private function addSlashes($link)
-    {
-        $sub_string = substr($link, 0, 1);
-        $new_link = substr($link, 1);
-        if ($sub_string == '/') {
-            $link = substr($this->addSlashes($new_link),1);
+
+    public function render(string $file_location){     
+        $layoutContent = $this->layoutContent();
+        $viewContent = $this->renderOnlyView($file_location);
+        if($this->layout){
+            print(str_replace("{{content}}",$viewContent,$layoutContent));
+        }else{
+            print($viewContent);
+        }   
+    }
+
+    public function setLayout(string $layout){
+        $this->layout = $this->checkFileExtension($this->view_location.$layout);
+    }
+    protected function layoutContent(){
+        if($this->layout)
+        {
+            $this->exception($this->layout);
+            foreach($this->data as $key=>$value){
+                $$key = $value;
+            }
+            ob_start();
+            include_once  $this->layout;
+            return ob_get_clean();
         }
-        return $link == '' ? $link : '/' . $link;
+    }
+    protected function renderOnlyView(string $view){
+        $view_file = $this->checkFileExtension($this->view_location."/".trim($view,"/"));
+        $this->exception($view_file);
+        foreach($this->data as $key=>$value){
+            $$key = $value;
+        }
+        ob_start();
+        include_once $view_file;
+        return ob_get_clean();
+    }
+
+    private function exception(string $file_path){
+        if(!is_file($file_path)){
+            throw new \InvalidArgumentException("$file_path file does not exist");
+        }
     }
 
     /**
@@ -67,15 +70,5 @@ class View
     {
         $file_parts = pathinfo($fileName);
         return isset($file_parts['extension']) ? $fileName : $fileName . '.php';
-    }
-
-    function __destruct()
-    {
-        extract($this->data);
-        if (is_file($this->render)) {
-            include($this->render);
-        } else {
-            print_r(['exception' => 'file path is not correct.?']);
-        }
     }
 }
