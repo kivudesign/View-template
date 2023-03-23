@@ -11,7 +11,7 @@
       <p><i class="fa fa-envelope-o w3-text-teal w3-xlarge"></i>  test@test.com</p>
     </div>
     <div class="w3-col m7">
-      <form class="w3-container w3-card-4 w3-padding-16 w3-white" action="/action_page.php" target="_blank">
+      <form class="w3-container w3-card-4 w3-padding-16 w3-white" action="https://github.com/bim-g/wepesi-view" target="_blank">
       <div class="w3-section">      
         <label>Name</label>
         <input class="w3-input" type="text" name="Name" required>

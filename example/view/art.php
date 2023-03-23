@@ -21,7 +21,7 @@ body {font-family: "Raleway", Arial, sans-serif}
     <a href="#" class="w3-left w3-button w3-white">MY ART</a>
     <a href="#about" class="w3-right w3-button w3-white">About</a>
   </header>
-
+  <div class="w3-large w3-center w3-padding w3-teal">View without Layout</div>
   <!-- Photo Grid -->
   <div class="w3-row">
     <div class="w3-half">
@@ -38,7 +38,6 @@ body {font-family: "Raleway", Arial, sans-serif}
   
 <!-- End Page Content -->
 </div>
-
 <!-- Footer / About Section -->
 <footer class="w3-light-grey w3-padding-64 w3-center" id="about">
   <h2>About</h2>
