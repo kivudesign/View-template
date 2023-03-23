@@ -19,25 +19,29 @@ class View
     public function assign(string $key,$value){
         $this->data[$key] = $value;
     }
-
-    public function render(string $file_location){     
-        $layoutContent = $this->layoutContent();
-        $viewContent = $this->renderOnlyView($file_location);
+    /**
+     * 
+     */
+    public function render(string $view_file){     
         if($this->layout){
-            print(str_replace("{{content}}",$viewContent,$layoutContent));
+            print($this->renderLayout($view_file));
         }else{
-            print($viewContent);
+            print($this->renderOnlyView($view_file));
         }   
     }
 
     public function setLayout(string $layout){
         $this->layout = $this->checkFileExtension($this->view_location.$layout);
     }
-    protected function layoutContent(){
-        if($this->layout)
+
+    protected function renderLayout(string $view){
+        if($this->layout && is_file($this->layout))
         {
+
             $this->exception($this->layout);
-            foreach($this->data as $key=>$value){
+            $layout_data = $this->data;
+            $layout_data['contentpages'] = $this->renderOnlyView($view);
+            foreach($layout_data as $key=>$value){
                 $$key = $value;
             }
             ob_start();
